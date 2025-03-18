@@ -1,0 +1,42 @@
+name: Build & push image.
+
+on:
+  push:
+    branches:
+    - main
+  workflow_call: # позволяет запускать пайплайн вручную через вкладку Actions
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    name: Build, Test, and Push Docker Image
+    runs-on: self-hosted
+
+    permissions:
+      contents: read
+      packages: write # Required for pushing to GHCR
+
+    steps:
+    # Checkout the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Log in to GitHub Container Registry
+    - name: Log in to GitHub Container Registry (GHCR)
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Convert Repository Owner to Lowercase
+      run: echo "REPO_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
+    - name: Build and Push Image to Registry
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        load: true
+        tags: |
+             ghcr.io/${{ env.REPO_OWNER }}/django-pg-docker-app:latest
