@@ -1,4 +1,4 @@
-name: Build & push image.
+name: Build & push image
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
     - name: Build and Push Image to Registry
       uses: docker/build-push-action@v4
       with:
-        context: .
+        context: django-pg-docker-app
         push: true
         load: true
         tags: |
