@@ -1,5 +1,7 @@
 FROM python:3.9-alpine
 
+LABEL org.opencontainers.image.source="https://github.com/skillfactory-devops/02_deploy"
+
 ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /requirements.txt
