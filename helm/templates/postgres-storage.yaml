@@ -1,7 +1,8 @@
+# From https://dev.to/dm8ry/how-to-deploy-postgresql-db-server-and-pgadmin-in-kubernetes-a-how-to-guide-5fm0
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: postgres-pv-volume
+  name: pg-pv-volume
   labels:
     type: local
     app: postgres
@@ -17,7 +18,7 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-pv-claim
+  name: pg-pv-claim
   labels:
     app: postgres
 spec:

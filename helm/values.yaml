@@ -1,19 +1,15 @@
-postgres:
-  image: postgres:13-alpine
-  volumeSize: 2Gi
-  password: password # Replace with your real password
-  dbName: tutorial-dev
-  user: vinhle
-
 app:
   port: 3003
   ingress:
     enabled: true
-    host: web.skillfactory-ermolaev.ru
+    host: zane.su
     path: /app
-  image: registry.gitlab.com/skillfactory-devops/sf-diploma-data/sample:main-20240303150623
   environment:
-    DB_HOST: postgres
-    DB_NAME: tutorial-dev
-    DB_USER: vinhle
-    DB_PASS: password # This password can also be stored in a secret and used from the secret
+    POSTGRES_HOST: postgres
+    POSTGRES_DB: tutorial-dev
+    POSTGRES_USER: vihnie
+    POSTGRES_PASSWORD: password
+
+postgres:
+  image: postgres:13-alpine
+  volumeSize: 2Gi

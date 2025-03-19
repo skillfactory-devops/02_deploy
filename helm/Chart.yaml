@@ -1,6 +1,6 @@
 apiVersion: v2
-name: sf-dipl-app
-description: A Helm chart for Kubernetes to deploy sf-diploma-app including PostgreSQL database
+name: django-pg-docker-app
+description: django-pg-docker-app deploy
 type: application
-version: 0.1.0
-appVersion: "1.0"
+version: 0.0.2
+appVersion: "0.0.2"

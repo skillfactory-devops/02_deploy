@@ -22,22 +22,22 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
-                  key: postgres-password
+                  name: app-secret
+                  key: pg-password
             - name: POSTGRES_DB
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
-                  key: postgres-db
+                  name: app-secret
+                  key: pg-db
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: postgres-secret
-                  key: postgres-user
+                  name: app-secret
+                  key: pg-user
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
               name: postgredb
       volumes:
         - name: postgredb
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: pg-pv-claim
