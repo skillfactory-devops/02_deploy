@@ -2,8 +2,8 @@ name: Build & push image
 
 on:
   push:
-    branches:
-    - main
+    branches: [ $default-branch ]
+    tags: [ 'v*.*.*' ]
   workflow_call: # позволяет запускать пайплайн вручную через вкладку Actions
   workflow_dispatch:
 
@@ -32,11 +32,18 @@ jobs:
     - name: Convert Repository Owner to Lowercase
       run: echo "REPO_OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
+    # Get tags
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+      with:
+        images: ${{ env.REPO_OWNER }}/django-pg-docker-app
+
     - name: Build and Push Image to Registry
       uses: docker/build-push-action@v4
       with:
         context: django-pg-docker-app
         push: true
         load: true
-        tags: |
-             ghcr.io/${{ env.REPO_OWNER }}/django-pg-docker-app:latest
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
