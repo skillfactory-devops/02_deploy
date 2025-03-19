@@ -37,7 +37,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
       with:
-        images: ${{ env.REPO_OWNER }}/django-pg-docker-app
+        images: ghcr.io/${{ env.REPO_OWNER }}/django-pg-docker-app
 
     - name: Build and Push Image to Registry
       uses: docker/build-push-action@v4
