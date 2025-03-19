@@ -26,3 +26,6 @@ COPY ./app /app
 RUN adduser -D user
 
 USER user
+
+# Way to run app
+CMD ["python", "manage.py", "runserver", "0.0.0.0:3003"]
