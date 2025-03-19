@@ -24,4 +24,5 @@
 
 ## Описываем стадию деплоя в Helm
 
-* Дописал в Github Workflow обновление приложения из Helm-чарта.
+* Дописал в Github Workflow обновление приложения из Helm-чарта?
+* [Убедился](https://github.com/skillfactory-devops/02_deploy/actions/runs/13949769167) в работоспособности Workflow.
