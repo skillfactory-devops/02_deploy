@@ -47,3 +47,10 @@ jobs:
         load: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+
+    # Kubernetes update
+    - name: Check helm chart syntax
+      run: helm lint helm
+
+    - name: Update app at k8s cluster
+      run: helm upgrade --install --create-namespace --namespace myapp --debug myapp helm
